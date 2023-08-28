@@ -10,12 +10,12 @@ class DashboardController extends Controller
     public function index()
     {
 
-        
+
 
         // dump(Idea::all());
 
         return view('dashboard',[
-            'ideas' => Idea::orderBy('created_at','DESC')->get()
+            'ideas' => Idea::orderBy('created_at','DESC')->paginate(5)
         ]);
     }
 }
