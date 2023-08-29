@@ -15,13 +15,21 @@ use Illuminate\Support\Facades\Route;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
-
+// Home
 Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
 
-Route::get('/idea/{idea}', [IdeaController::class, 'show'])->name('ideas.show');
 
+// Create
 Route::post('/ideas', [IdeaController::class, 'store'])->name('ideas.store');
+// Edit
+Route::get('/idea/{idea}/edit', [IdeaController::class, 'edit'])->name('ideas.edit');
+// View
+Route::get('/idea/{idea}', [IdeaController::class, 'show'])->name('ideas.show');
+// Update
+Route::put('/idea/{idea}', [IdeaController::class, 'update'])->name('ideas.update');
 
+
+// Delete
 Route::delete('/idea/{idea}', [IdeaController::class, 'destroy'])->name('ideas.destroy');
 
 
