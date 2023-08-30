@@ -21,6 +21,9 @@ class IdeaController extends Controller
         $validated = request()->validate([
             'content' => 'required|min:3|max:240'
         ]);
+
+        $validated['user_id']= auth()->id();
+
         Idea::create($validated);
         return redirect()->route('dashboard')->with('success', 'Tweet created Successfully!');
     }

@@ -42,12 +42,17 @@ Route::post('/ideas/{idea}/comments', [CommentController::class, 'store'])->name
 
 // User register
 Route::get('/register', [AuthController::class, 'register'])->name('register');
-//
 Route::post('/register', [AuthController::class, 'store']);
 
 
+//User Login
 
+Route::get('/login', [AuthController::class, 'login'])->name('login');
+Route::post('/login', [AuthController::class, 'authenticate']);
 
+//Logout
+
+Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
 
 

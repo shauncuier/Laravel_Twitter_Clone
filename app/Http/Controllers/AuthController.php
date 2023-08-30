@@ -31,4 +31,46 @@ class AuthController extends Controller
         );
         return redirect()->route('dashboard')->with('success', 'Account created Successfully!');
     }
+
+
+    //Login
+
+
+    public function login()
+    {
+        return view('auth.login');
+    }
+
+    public function authenticate()
+    {
+        $validated = request()->validate([
+
+            'email' => 'email|required',
+            'password' => 'required|min:8'
+
+        ]);
+        if (auth()->attempt($validated)) {
+
+            request()->session()->regenerate();
+
+            return redirect()->route('dashboard')->with('success', 'Login Successfully!');
+        }
+
+        return redirect()->route('login')->withErrors([
+            'email' => "Email Or Password Not Matching"
+        ]);
+    }
+
+
+    //Logout
+
+
+    public function logout(){
+        auth()->logout();
+        request()->session()->invalidate();
+        request()->session()->regenerateToken();
+
+        return redirect()->route('login')->with('success', 'Logged out Successfully!');
+
+    }
 }
