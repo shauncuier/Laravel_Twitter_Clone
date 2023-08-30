@@ -22,7 +22,7 @@ class IdeaController extends Controller
             'content' => 'required|min:3|max:240'
         ]);
 
-        $validated['user_id']= auth()->id();
+        $validated['user_id'] = auth()->id();
 
         Idea::create($validated);
         return redirect()->route('dashboard')->with('success', 'Tweet created Successfully!');
@@ -30,12 +30,19 @@ class IdeaController extends Controller
     public function destroy(Idea $idea)
     {
 
+        if (auth()->id() !== $idea->user_id) {
+            abort(404);
+        }
         $idea->delete();
         return redirect()->route('dashboard')->with('error', 'Tweet Delete Successfully!');
     }
 
     public function edit(Idea $idea)
     {
+        if (auth()->id() !== $idea->user_id) {
+            abort(404);
+        }
+
         $editing = true;
         return view('ideas.show', compact('idea', 'editing'));
     }

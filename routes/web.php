@@ -17,45 +17,37 @@ use Illuminate\Support\Facades\Route;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
-// Home
+
 Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
 
-//Idea
-// Create
-Route::post('/ideas', [IdeaController::class, 'store'])->name('ideas.store');
-// Edit
-Route::get('/idea/{idea}/edit', [IdeaController::class, 'edit'])->name('ideas.edit');
-// View
-Route::get('/idea/{idea}', [IdeaController::class, 'show'])->name('ideas.show');
-// Update
-Route::put('/idea/{idea}', [IdeaController::class, 'update'])->name('ideas.update');
-// Delete
-Route::delete('/idea/{idea}', [IdeaController::class, 'destroy'])->name('ideas.destroy');
-//Idea
 
 
-//Comment
+Route::group(['prefix' => 'ideas/', 'as' => 'ideas.',], function () {
 
-//Create
-Route::post('/ideas/{idea}/comments', [CommentController::class, 'store'])->name('ideas.comments.store');
+    Route::post('', [IdeaController::class, 'store'])->name('store');
 
+    Route::get('{idea}', [IdeaController::class, 'show'])->name('show');
 
-// User register
-Route::get('/register', [AuthController::class, 'register'])->name('register');
-Route::post('/register', [AuthController::class, 'store']);
+    Route::group(['middleware' => ['auth']], function () {
 
+        Route::get('{idea}/edit', [IdeaController::class, 'edit'])->name('edit');
 
-//User Login
+        Route::put('{idea}', [IdeaController::class, 'update'])->name('update');
 
-Route::get('/login', [AuthController::class, 'login'])->name('login');
-Route::post('/login', [AuthController::class, 'authenticate']);
+        Route::delete('{idea}', [IdeaController::class, 'destroy'])->name('destroy');
 
-//Logout
-
-Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
+        Route::post('{idea}/comments', [CommentController::class, 'store'])->name('comments.store');
+    });
+});
 
 
 
-Route::get('/terms', function (){
+
+
+
+
+
+
+Route::get('/terms', function () {
     return view('terms');
 });
