@@ -20,8 +20,6 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
 
-
-
 Route::group(['prefix' => 'ideas/', 'as' => 'ideas.',], function () {
 
     Route::post('', [IdeaController::class, 'store'])->name('store');
@@ -39,14 +37,6 @@ Route::group(['prefix' => 'ideas/', 'as' => 'ideas.',], function () {
         Route::post('{idea}/comments', [CommentController::class, 'store'])->name('comments.store');
     });
 });
-
-
-
-
-
-
-
-
 
 Route::get('/terms', function () {
     return view('terms');
