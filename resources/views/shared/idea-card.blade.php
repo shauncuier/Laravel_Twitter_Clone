@@ -3,18 +3,21 @@
         <div class="d-flex align-items-center justify-content-between">
             <div class="d-flex align-items-center">
                 <img style="width:50px" class="me-2 avatar-sm rounded-circle"
-                    src="https://api.dicebear.com/6.x/fun-emoji/svg?seed=Mario" alt="Mario Avatar">
+                    src="https://api.dicebear.com/6.x/fun-emoji/svg?seed={{ $idea->user->name }}" alt="{{ $idea->user->name }}">
                 <div>
-                    <h5 class="card-title mb-0"><a href="#"> Mario
-                        </a></h5>
+                    <h5 class="card-title mb-0">
+                        <a href="{{ route('ideas.show', $idea->id) }}"> {{ $idea->user->name }} </a>
+                    </h5>
                 </div>
             </div>
             <div>
                 <form action="{{ route('ideas.destroy', $idea->id) }}" method="post">
                     @csrf
                     @method('delete')
-                    <a class="btn btn-info btn-sm" href="{{ route('ideas.edit', $idea->id) }}"><i class="fa-regular fa-pen-to-square"></i></a>
-                    <a class="btn btn-success btn-sm" href="{{ route('ideas.show', $idea->id) }}"><i class="fa-regular fa-eye"></i></a>
+                    <a class="btn btn-info btn-sm" href="{{ route('ideas.edit', $idea->id) }}"><i
+                            class="fa-regular fa-pen-to-square"></i></a>
+                    <a class="btn btn-success btn-sm" href="{{ route('ideas.show', $idea->id) }}"><i
+                            class="fa-regular fa-eye"></i></a>
                     <button class="btn btn-danger btn-sm"><i class="fa-solid fa-trash"></i></button>
 
                 </form>
@@ -25,7 +28,7 @@
     <div class="card-body">
 
         @if ($editing ?? false)
-            <form action="{{ route('ideas.update',$idea->id) }}" method="post">
+            <form action="{{ route('ideas.update', $idea->id) }}" method="post">
                 @csrf
                 @method('put')
                 <div class="mb-3">
@@ -35,7 +38,8 @@
                     @enderror
                 </div>
                 <div class="">
-                    <button type="submit" class="btn-secondary btn btn-sm"><i class="fa-solid fa-pen-to-square"></i> Update</button>
+                    <button type="submit" class="btn-secondary btn btn-sm"><i class="fa-solid fa-pen-to-square"></i>
+                        Update</button>
                 </div>
             </form>
         @else
@@ -57,7 +61,7 @@
                 </span>
             </div>
         </div>
-       @include('shared.comment-box')
+        @include('shared.comment-box')
     </div>
 
 </div>
