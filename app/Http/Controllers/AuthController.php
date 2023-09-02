@@ -12,7 +12,6 @@ class AuthController extends Controller
     {
         return view('auth.register');
     }
-
     public function store()
     {
         $validated = request()->validate([
@@ -21,7 +20,6 @@ class AuthController extends Controller
             'password' => 'required|confirmed|min:8'
 
         ]);
-
         User::create(
             [
                 'name' => $validated['name'],
@@ -29,42 +27,35 @@ class AuthController extends Controller
                 'password' => Hash::make($validated['password']),
             ]
         );
+
+
+
+
         return redirect()->route('dashboard')->with('success', 'Account created Successfully!');
     }
 
 
     //Login
-
-
     public function login()
     {
         return view('auth.login');
     }
-
     public function authenticate()
     {
         $validated = request()->validate([
 
             'email' => 'email|required',
             'password' => 'required|min:8'
-
         ]);
         if (auth()->attempt($validated)) {
-
             request()->session()->regenerate();
-
             return redirect()->route('dashboard')->with('success', 'Login Successfully!');
         }
-
         return redirect()->route('login')->withErrors([
             'email' => "Email Or Password Not Matching"
         ]);
     }
-
-
     //Logout
-
-
     public function logout()
     {
         auth()->logout();
