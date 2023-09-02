@@ -17,7 +17,6 @@
                     @method('delete')
                     <a class="btn btn-success btn-sm" href="{{ route('ideas.show', $idea->id) }}"><i
                             class="fa-regular fa-eye"></i></a>
-
                     @auth()
                         <a class="btn btn-info btn-sm" href="{{ route('ideas.edit', $idea->id) }}"><i
                                 class="fa-regular fa-pen-to-square"></i></a>

@@ -12,7 +12,6 @@
                 @include('shared.user-card')
             </div>
             <hr>
-
             @forelse  ($ideas as $idea)
                 <div class="mt-3">
                     @include('shared.idea-card')
@@ -20,12 +19,9 @@
             @empty
                 <p class="text-center mt-5">No Result Found...</p>
             @endforelse
-
             <div class="mt-3">
                 {{ $ideas->withQueryString()->links() }}
             </div>
-
-
         </div>
         <div class="col-3">
             @include('shared.search-bar')

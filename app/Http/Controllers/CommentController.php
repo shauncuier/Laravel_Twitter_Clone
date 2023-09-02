@@ -8,13 +8,14 @@ use Illuminate\Http\Request;
 
 class CommentController extends Controller
 {
-    public function store(Idea $idea){
+    public function store(Idea $idea)
+    {
         $comment = new Comment();
         $comment->idea_id = $idea->id;
         $comment->user_id = auth()->id();
         $comment->content = request()->get('content');
         $comment->save();
 
-        return redirect()->route('ideas.show', $idea->id)->with('success','Comment added Successfully!!');
+        return redirect()->route('ideas.show', $idea->id)->with('success', 'Comment added Successfully!!');
     }
 }

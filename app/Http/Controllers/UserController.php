@@ -12,8 +12,8 @@ class UserController extends Controller
      */
     public function show(User $user)
     {
-        $ideas = $user -> ideas() -> paginate(5);
-        return view('users.show', compact('user','ideas'));
+        $ideas = $user->ideas()->paginate(5);
+        return view('users.show', compact('user', 'ideas'));
     }
 
     /**
@@ -24,7 +24,7 @@ class UserController extends Controller
 
         $editing = true;
         $ideas = $user->ideas()->paginate(5);
-        return view('users.show', compact('user', 'editing','ideas'));
+        return view('users.show', compact('user', 'editing', 'ideas'));
     }
 
     /**
@@ -35,7 +35,8 @@ class UserController extends Controller
         //
     }
 
-    public function profile(){
+    public function profile()
+    {
         return $this->show(auth()->user());
     }
 }

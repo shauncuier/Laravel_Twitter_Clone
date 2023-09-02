@@ -9,7 +9,6 @@
             @include('shared.error-message')
             @include('shared.submit-idea')
             <hr>
-
             @forelse  ($ideas as $idea)
                 <div class="mt-3">
                     @include('shared.idea-card')
@@ -17,7 +16,6 @@
             @empty
                 <p class="text-center mt-5">No Result Found...</p>
             @endforelse
-
             <div class="mt-3">
                 {{ $ideas->withQueryString()->links() }}
             </div>
