@@ -2,8 +2,8 @@
     <div class="px-3 pt-4 pb-2">
         <div class="d-flex align-items-center justify-content-between">
             <div class="d-flex align-items-center">
-                <img style="width:150px" class="me-3 avatar-sm rounded-circle"
-                    src="{{$user->getImageURL()}}" alt="{{ $user->name }}">
+                <img style="width:150px" class="me-3 avatar-sm rounded-circle" src="{{ $user->getImageURL() }}"
+                    alt="{{ $user->name }}">
                 <div>
 
                     <h3 class="card-title mb-0"><a href="{{ route('users.show', $user->id) }}"> {{ $user->name }}
@@ -40,7 +40,22 @@
             @auth()
                 @if (Auth::id() !== $user->id)
                     <div class="mt-3">
-                        <button class="btn btn-primary btn-sm"> Follow </button>
+                        @if(Auth::user()->follows($user))
+
+                            <form action="{{ route('users.unfollow', $user->id) }}" method="post">
+                                @csrf
+                                <button type="submit" class="btn btn-danger btn-sm"> Unfollow </button>
+                            </form>
+                        @else
+
+                            <form action="{{ route('users.follow', $user->id) }}" method="post">
+                                @csrf
+                                <button type="submit" class="btn btn-primary btn-sm"> Follow </button>
+                            </form>
+
+                        @endif
+
+
                     </div>
                 @endif
             @endauth

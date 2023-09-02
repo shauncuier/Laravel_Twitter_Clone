@@ -30,7 +30,7 @@
 
             <div>
                 <label class="mt-4" for="">Profile Picture</label>
-                
+
                 <input name="image" type="file" class="form-control mt-3 ">
 
                 @error('image')
@@ -59,13 +59,6 @@
                     <a href="#" class="fw-light nav-link fs-6"> <span class="fas fa-comment me-1">
                         </span> {{ $user->comments()->count() }} </a>
                 </div>
-                @auth()
-                    @if (Auth::id() !== $user->id)
-                        <div class="mt-3">
-                            <button class="btn btn-primary btn-sm"> Follow </button>
-                        </div>
-                    @endif
-                @endauth
             </div>
 
         </form>
