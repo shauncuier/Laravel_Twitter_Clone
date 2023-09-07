@@ -20,11 +20,8 @@
                     @auth()
                         <a class="btn btn-info btn-sm" href="{{ route('ideas.edit', $idea->id) }}"><i
                                 class="fa-regular fa-pen-to-square"></i></a>
-
                         <button class="btn btn-danger btn-sm"><i class="fa-solid fa-trash"></i></button>
                     @endauth
-
-
                 </form>
 
             </div>
@@ -52,9 +49,6 @@
                 {{ $idea->content }}
             </p>
         @endif
-
-
-
 
         <div class="d-flex justify-content-between">
             @include('ideas.shared.like-button')
