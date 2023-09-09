@@ -6,11 +6,11 @@
                     href="{{ route('dashboard') }}">
                     <span>Home</span></a>
             </li>
-            {{-- <li class="nav-item">
-                <a class=" {{ Route::is('profile') ? 'text-white bg-primary rounded ' : '' }}nav-link"
-                    href="{{ route('profile') }}">
-                    <span>Profile</span></a>
-            </li> --}}
+            <li class="nav-item">
+                <a class=" {{ Route::is('feed') ? 'text-white bg-primary rounded ' : '' }}nav-link"
+                    href="{{ route('feed') }}">
+                    <span>Feed</span></a>
+            </li>
             <li class="nav-item">
                 <a class=" {{ Route::is('terms') ? 'text-white bg-primary rounded ' : '' }}nav-link"
                     href="{{ route('terms') }}">
